@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: reel-movie-discovery
+    runtime: node
+    plan: free
+    buildCommand: npm --prefix server install && npm --prefix client install --include=dev && npm --prefix client run build
+    startCommand: npm --prefix server start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: TMDB_READ_TOKEN
+        sync: false # paste your TMDB token in the Render dashboard; leave empty to use the sample catalogue
